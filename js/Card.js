@@ -56,7 +56,8 @@ Card.prototype = {
 							bootcamp_kanban_column_id: self.id
 					},
 					success: function() {
-							cardDescription.append().text(this.newName);
+							cardDescription.text(newName);
+							console.log(newName);
 					}
 			});
 	}
