@@ -2,8 +2,6 @@
 function Card(id, name) {
 	var self = this;
 
-//	this.id = randomString();
-//	this.description = description;
 	this.id = id;
 	this.name = name || 'No name given';
 	this.element = createCard();
@@ -17,12 +15,20 @@ function Card(id, name) {
 			self.removeCard();
 		});
 
+//edycja nazwy karty
+		cardDescription.dblclick(function(){
+			self.editCard();
+		});
+
 		card.append(cardDeleteBtn);
 		cardDescription.text(self.name);
 		card.append(cardDescription);
 		return card;
-	}
+
 }
+
+}
+
 Card.prototype = {
 	removeCard: function() {
     var self = this;
@@ -33,5 +39,27 @@ Card.prototype = {
         self.element.remove();
       }
     });
-}
+	},
+
+
+//edycja nazwy karty
+	editCard: function() {
+		var self = this;
+		var cardDescription = $('<p class="card-description"></p>');
+		var newName = prompt('Edit card name: ');
+		$.ajax({
+					url: baseUrl + '/card/' + self.id,
+					method: 'PUT',
+					data: {
+							id: self.id,
+							name: newName,
+							bootcamp_kanban_column_id: self.id
+					},
+					success: function() {
+							cardDescription.append().text(self.newName);
+					}
+			});
+	}
+
+
 };
