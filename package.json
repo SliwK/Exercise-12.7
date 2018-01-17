@@ -1,5 +1,5 @@
 {
-  "name": "EX-7.5",
+  "name": "EX-12.7",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -32,11 +32,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SliwK/Exercise-8.3.git"
+    "url": "git+https://github.com/SliwK/Exercise-12.7.git"
   },
   "bugs": {
-    "url": "https://github.com/SliwK/Exercise-8.3/issues"
+    "url": "https://github.com/SliwK/Exercise-12.7/issues"
   },
-  "homepage": "https://github.com/SliwK/Exercise-8.3#readme",
+  "homepage": "https://github.com/SliwK/Exercise-12.7#readme",
   "description": ""
 }
