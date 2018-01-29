@@ -53,7 +53,7 @@ Card.prototype = {
 					data: {
 							id: self.id,
 							name: newName,
-							bootcamp_kanban_column_id: self.id
+							bootcamp_kanban_column_id: Column.id
 					},
 					success: function() {
 							cardDescription.text(newName);
