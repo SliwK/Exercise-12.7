@@ -52,15 +52,14 @@ Card.prototype = {
 					url: baseUrl + '/card/' + self.id,
 					method: 'PUT',
 					data: {
-							id: self.id,
 							name: newName,
 							bootcamp_kanban_column_id: self.idColumn
 					},
 					success: function() {
-						if(newName !== null || newName.length !== 0){
+						if(newName !== null && newName.length !== 0){
 							cardDescription.replaceWith(newName);
 							console.log(newName);
-			     		self.element.find('.card-description').replaceWith(newName);
+			     		self.element.find('.card-description').text(newName);
 						}
 					}
 			});

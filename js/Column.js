@@ -2,7 +2,6 @@ function Column(id, name) {
 	var self = this;
 
 	this.id = id;
-//	this.id = randomString();
 	this.name = name || 'No name given';
 	this.element = createColumn();
 
@@ -30,11 +29,16 @@ function Column(id, name) {
 								bootcamp_kanban_column_id: self.id
 						},
 						success: function(response) {
-								var card = new Card(response.id, cardName);
+								var card = new Card(response.id, cardName, self.id);
 								self.createCard(card);
 						}
 		    });
-});
+		});
+
+		//edycja nazwy kolumny
+		columnTitle.dblclick(function(){
+			self.editColumn();
+		});
 
 			// KONSTRUOWANIE ELEMENTU KOLUMNY
 		column.append(columnTitle)
@@ -43,7 +47,9 @@ function Column(id, name) {
 			.append(columnCardList);
 			return column;
 		}
+
 	}
+
 Column.prototype = {
 	createCard: function(card) {
 	  this.element.children('ul').append(card.element);
@@ -57,7 +63,29 @@ Column.prototype = {
 	        self.element.remove();
 	      }
 	    });
-	 }
+	 },
+
+	 //edycja nazwy karty
+	 	editColumn: function() {
+	 		var self = this;
+			var columnTitle = $('<h2 class="column-title"></h2>');
+			var newColName = prompt('Edit column name: ');
+	 		$.ajax({
+	 					url: baseUrl + '/column/' + self.id,
+	 					method: 'PUT',
+	 					data: {
+	 							name: newColName,
+					//			bootcamp_kanban_column_id: self.id
+	 					},
+	 					success: function() {
+	 						if(newColName !== null && newColName.length !== 0){
+	 							columnTitle.replaceWith(newColName);
+	 							console.log(newColName);
+	 			     		self.element.find('.column-title').text(newColName);
+	 						}
+	 					}
+	 			});
+	 	}
 
 
 };
