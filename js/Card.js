@@ -1,9 +1,10 @@
 // KLASA KANBAN CARD
-function Card(id, name) {
+function Card(id, name, idColumn) {
 	var self = this;
 
 	this.id = id;
 	this.name = name || 'No name given';
+	this.idColumn = idColumn;
 	this.element = createCard();
 
 	function createCard() {
@@ -53,11 +54,14 @@ Card.prototype = {
 					data: {
 							id: self.id,
 							name: newName,
-							bootcamp_kanban_column_id: Column.id
+							bootcamp_kanban_column_id: self.idColumn
 					},
 					success: function() {
-							cardDescription.text(newName);
+						if(newName !== null || newName.length !== 0){
+							cardDescription.replaceWith(newName);
 							console.log(newName);
+			     		self.element.find('.card-description').replaceWith(newName);
+						}
 					}
 			});
 	}
